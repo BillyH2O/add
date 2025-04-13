@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Debug and output dirs that can be regenerated
+debug_plots/
+output/
+# output_add/ - Ne plus ignorer ce répertoire
+
+# Data files - ignorer tout le répertoire data
+/data/
+
+# Output teacher - ignorer uniquement model12k
+output_teacher/model12k/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo 

@@ -1,0 +1,17 @@
+torch
+torchvision
+diffusers
+transformers
+accelerate
+datasets
+pandas
+numpy
+matplotlib
+pillow
+tqdm
+scikit-learn
+wandb
+opencv-python
+openpyxl
+xformers
+fsspec==2025.3.2
