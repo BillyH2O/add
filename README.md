@@ -1,6 +1,9 @@
 # ADD0 - Adversarial Diffusion Distillation pour la génération d'images Pokémon
 
-![dielkiatieus](https://github.com/user-attachments/assets/e95e3396-5087-4fbb-ade3-9fc033a62097)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e95e3396-5087-4fbb-ade3-9fc033a62097" alt="dielkiatieus">
+</p>
+
 
 
 Ce débot contient une implémentation de la méthode Adversarial Diffusion Distillation (ADD) pour générer des images de Pokémon de haute qualité en un minimum d'étapes. Nous étudions l'efficacité de cette approche à travers trois configurations :
