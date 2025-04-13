@@ -1,10 +1,11 @@
+modelADD.py
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from diffusers import UNet2DConditionModel, AutoencoderKL
+from diffusers import UNet2DConditionModel, AutoencoderKL, DDIMScheduler
 from transformers import CLIPTextModel, CLIPTokenizer
 import numpy as np
-
+from tqdm import tqdm
 import timm  # pour charger le ViT pré-entraîné 
 
 class FrozenViTFeatureExtractor(nn.Module):
@@ -258,3 +259,70 @@ class PokemonADD(nn.Module):
             "latents_s": latents_s,
             "latents_0": latents_0
         }
+    
+    def generate(self, prompts, num_inference_steps=40, guidance_scale=7.5, height=512, width=512, seed=None):
+        if isinstance(prompts, str):
+            prompts = [prompts]
+            
+        if seed is not None:
+            torch.manual_seed(seed)
+        
+        self.eval()
+        batch_size = len(prompts)
+        device = self.device
+        
+        # Initialiser le planificateur DDIM
+        scheduler = DDIMScheduler(
+            beta_start=0.00085,
+            beta_end=0.012,
+            beta_schedule="scaled_linear",
+            clip_sample=False,
+            set_alpha_to_one=False
+        )
+        scheduler.set_timesteps(num_inference_steps)
+        
+        # Encoder les prompts texte
+        text_embeddings, _ = self.encode_text(prompts)  # (B, 77, 768)
+        
+        # Générer des embeddings non conditionnels pour la guidance
+        null_prompts = [""] * batch_size
+        null_embeddings, _ = self.encode_text(null_prompts)
+        combined_embeddings = torch.cat([null_embeddings, text_embeddings], dim=0)  # (2B, 77, 768)
+        
+        # Initialiser les latents
+        latents = torch.randn(
+            (batch_size, 4, height // 8, width // 8),
+            device=device,
+            dtype=torch.float32
+        )
+        
+        # Boucle de débruitage
+        with torch.no_grad():
+            for t in tqdm(scheduler.timesteps, desc="Débruitage"):
+                # Dupliquer les latents pour conditionnel et non conditionnel
+                latent_input = torch.cat([latents] * 2, dim=0)  # (2B, 4, H//8, W//8)
+                
+                # Préparer l'étape temporelle
+                timestep = torch.full((latent_input.shape[0],), t, device=device, dtype=torch.long)
+                
+                # Prédiction du modèle étudiant
+                noise_pred = self.student(
+                    latent_input,
+                    timestep,
+                    encoder_hidden_states=combined_embeddings
+                ).sample
+                
+                # Guidance sans classifieur
+                noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
+                noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_text - noise_pred_uncond)
+                
+                # Mettre à jour les latents avec le planificateur
+                latents = scheduler.step(noise_pred, t, latents).prev_sample
+        
+        # Décoder les latents en images
+        images = self.decode_latents_to_images(latents)
+        
+        # Convertir en tableaux numpy
+        images_np = [np.uint8(img.permute(1, 2, 0).cpu().numpy() * 255) for img in images]
+        
+        return images_np
