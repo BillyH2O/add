@@ -1,6 +1,5 @@
 # ADD0 - Adversarial Diffusion Distillation pour la génération d'images Pokémon
 
-![cytech](https://github.com/user-attachments/assets/173df8e0-945e-4039-96b4-3676f203ce71)
 ![dielkiatieus](https://github.com/user-attachments/assets/e95e3396-5087-4fbb-ade3-9fc033a62097)
 
 
