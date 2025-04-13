@@ -1,5 +1,9 @@
 # ADD0 - Adversarial Diffusion Distillation pour la génération d'images Pokémon
 
+![cytech](https://github.com/user-attachments/assets/173df8e0-945e-4039-96b4-3676f203ce71)
+![dielkiatieus](https://github.com/user-attachments/assets/e95e3396-5087-4fbb-ade3-9fc033a62097)
+
+
 Ce débot contient une implémentation de la méthode Adversarial Diffusion Distillation (ADD) pour générer des images de Pokémon de haute qualité en un minimum d'étapes. Nous étudions l'efficacité de cette approche à travers trois configurations :
 
 Un modèle teacher basé sur Stable Diffusion v1-4, utilisé sans fine-tuning (configuration de base).
