@@ -23,6 +23,8 @@ Un modèle student entraîné avec ADD, combinant distillation et apprentissage 
 ## Structure du projet
 
 ```
+├── docs/                   # Documentation
+│   ├── rapport_add0.pdf    # rapport pdf 
 ├── data/                   # Données brutes et prétraitées (non incluses)
 ├── models/                 # Modèles pré-entraînés (non inclus)
 ├── les notebooks          
@@ -40,7 +42,7 @@ Un modèle student entraîné avec ADD, combinant distillation et apprentissage 
 │   ├── preprocessing12k.py # Prétraitement pour dataset n°2
 │   ├── interface.py        # Interface utilisateur pour la génération
 │   └── test_quality.py     # Évaluation de la qualité des images
-├── prompts.txt            # Exemples de prompts pour la génération d'images
+├── prompts.txt             # Exemples de prompts pour la génération d'images
 ├── requirements.txt        # Dépendances du projet
 └── README.md               # Ce fichier
 ```
@@ -157,4 +159,4 @@ Les notebooks Jupyter offrent une exploration interactive :
 
 - L'entraînement ADD peut être instable sans un réglage fin des hyperparamètres (voir section 7.5 du rapport).
 - Pour de meilleurs résultats, utilisez un dataset diversifié (recommandé : dataset n°2 avec 11325 images).
-- Consultez le rapport (rapport_add.pdf) pour une analyse détaillée des performances.
+- Consultez le rapport (docs/rapport_add0.pdf) pour une analyse détaillée des performances.
