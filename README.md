@@ -49,7 +49,7 @@ Un modèle student entraîné avec ADD, combinant distillation et apprentissage 
 
 1. Clonez le dépôt :
 ```bash
-git clone https://github.com/BillyH20/add.git
+git clone https://github.com/BillyH20/add0.git
 cd add
 ```
 
