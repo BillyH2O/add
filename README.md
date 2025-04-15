@@ -153,7 +153,7 @@ Les notebooks Jupyter offrent une exploration interactive :
 - Sauer, A., et al. Adversarial Diffusion Distillation : https://arxiv.org/abs/2311.17042
 - Stable Diffusion v1-4 : [Hugging Face](https://huggingface.co/CompVis/stable-diffusion-v1-4)
 - Datasets Pokémon : [Kaggle](https://www.kaggle.com/datasets)
-- Code source : [GitHub](https://github.com/BillyH20/add)
+- Code source : [GitHub ](https://github.com/BillyH20/add)
 
 ## Remarques
 
